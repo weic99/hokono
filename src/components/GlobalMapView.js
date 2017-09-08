@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   GoogleMap,
-  Nav,
+  GlobalPetFeed,
 } from './index';
 import { cordsFromAddress } from './lib/helpers';
 import fb from 'firebase';
@@ -12,6 +12,8 @@ export default class extends React.Component {
     this.state = {
       center: typeof this.props.userLocation === 'string' ? undefined : this.props.userLocation,
       markers: undefined,
+      accounts: undefined,
+      inboundPets: {},
     }
   }
 
@@ -26,17 +28,21 @@ export default class extends React.Component {
     fb.database().ref('/accounts').once('value')
       .then(snapshot => {
         const accounts = snapshot.val();
+        this.setState({ accounts });
         this.setState({
           markers: Object.values(accounts).map(account => {
             return this.props.auth.uid !== account.uid ? {
               position: account.location || account.address,
-              title: account.displayName,
+              label: account.displayName,
+              title: account.uid,
               animation: 'drop',
               onClick: () => {
                 this.props.history.push(`/${account.acctType}/profile/${account.uid}`);
               },
             } : {
               position: account.location || account.address,
+              label: '',
+              title: 'home',
               animation: 'none',
               onClick: () => {},
               icon: '/images/bullseye.png',
@@ -59,12 +65,27 @@ export default class extends React.Component {
     }
   }
 
+  getInboundPets(map, markers) {
+    const inboundPets = markers ? markers.reduce((accum, marker, i) => {
+      if (marker.getTitle() === 'home') return accum;
+      if (map.getBounds().contains(marker.getPosition())) {
+        const pets = this.state.accounts[marker.getTitle()].pets;
+        return pets ? { ...accum, ...pets } : accum;
+      }
+      return accum;
+    }, {}) : {};
+    this.setState({ inboundPets });
+  }
+
   render() {
     return (
       <div>
-        <Nav />
         <div
-          style={{display: 'flex', justifyContent: 'center'}}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
         >
           <GoogleMap
             center={this.state.center}
@@ -72,6 +93,11 @@ export default class extends React.Component {
             markers={this.state.markers}
             markerDelay={0}
             dimensions={['500px', '800px']}
+            onIdle={this.getInboundPets.bind(this)}
+          />
+          <GlobalPetFeed
+            {...this.props}
+            gPets={this.state.inboundPets}
           />
         </div>
       </div>
