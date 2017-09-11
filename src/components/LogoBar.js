@@ -1,5 +1,6 @@
 import React from 'react';
 import { signoutAction } from '../actions/AuthActions';
+import { Link } from 'react-router-dom';
 
 export default props => (
   <div>
@@ -7,18 +8,19 @@ export default props => (
     className="logo-bar-filler"
   >
   </div>
-  <div
-    className="row-box-center"
-  >
+  <Link to="/">
     <div
-      className="logo-box"
+      className="row-box-center"
     >
-      <img
-        className="logo"
-        src="/images/hokono-logo-v1.0.png"
-        alt=""
-      />
-    </div>
+      <div
+        className="logo-box"
+      >
+        <img
+          className="logo"
+          src="/images/hokono-logo-v1.0.png"
+          alt=""
+        />
+      </div>
     {
       props.auth.loggedIn ?
         <button
@@ -27,6 +29,7 @@ export default props => (
         >Logout</button> :
         null
     }
-  </div>
+    </div>
+   </Link>
   </div>
 )
