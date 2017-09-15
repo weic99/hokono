@@ -50,7 +50,6 @@ export default class PetPost extends React.Component {
        className="post-feed-entry-box"
       >
         <Link to={`/pet/${this.state.petId}/post/${this.state.postId}`}>
-            {console.log(this.state.name)}
             {this.state.name}
         </Link>
         <img
@@ -84,7 +83,7 @@ export default class PetPost extends React.Component {
               alt=""
             />
           </button>
-          <FacebookShareButton url={`localhost:3000/${this.state.petId}/post/${this.state.postId}`} title={this.state.name} description={this.state.post.description}>
+          <FacebookShareButton url={`https://hokono-90da1.firebaseapp.com/pet/${this.state.petId}/post/${this.state.postId}`} title={this.state.name} quote={this.state.post.description}>
             <FacebookIcon size={32} round/>
           </FacebookShareButton>
         </div>

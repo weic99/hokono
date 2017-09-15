@@ -40,8 +40,22 @@ export default (state = { got: false }, action) => {
       stateCopy.pets[action.petId].posts[action.postId].likedBy = action.payload.likedBy;
       return stateCopy;
     case 'NEW_ADOPT_REQUEST' :
-      return {...state, ...action.payload};
+      return {...state, adoptRequests: action.payload};
     case 'UPDATE_ADOPT_REQUEST_STATUS':
+      return {
+        ...state,
+        adoptRequests: {
+          ...state.adoptRequests,
+          [action.petId]: {
+            ...state.adoptRequests[action.petId],
+            [action.requesterUid]: {
+              ...state.adoptRequests[action.petId][action.requesterUid],
+              ...action.payload,
+            }
+          }
+        }
+      };
+    case 'CLOSE_ADOPT_REQUEST':
       return {
         ...state,
         adoptRequests: {

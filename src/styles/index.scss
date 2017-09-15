@@ -1,6 +1,6 @@
 @import 'reset';
+@import 'react-vis';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600|Quicksand|Muli|Lato|Baloo+Bhaijaan');
-
 
   /////////////////////
  // --- DEFAULTS -- //
@@ -94,6 +94,34 @@ a {
 }
 
 
+  /////////////////
+ // --- HOME -- //
+/////////////////
+.home-box {
+	@extend .col-box-center;
+
+	p {
+		margin: 50px;
+		font-size: 20px;
+	}
+
+	img {
+		margin-bottom: 50px;
+	}
+
+	.interactions-box {
+		a {
+			@extend button;
+		}
+
+		a:hover {
+			background-color: darkgrey;
+			color: white;
+		}
+	}
+}
+
+
   //////////////////////
  // --- LOGO BAR --- //
 //////////////////////
@@ -115,7 +143,7 @@ a {
 }
 
 .logo {
-	height: 40px;
+	height: 85px;
 }
 
 .logout-bttn {
@@ -172,6 +200,15 @@ a {
 
 .nav-item:hover {
 	background-color: lightgrey;
+}
+
+.nav-text-item {
+	@extend .nav-item;
+	@extend .row-box-center;
+	white-space: nowrap;
+	width: 100%;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 
@@ -499,6 +536,130 @@ a {
 		margin-top: 0px;
 		margin-bottom: 0px;
 	}
+}
 
 
+  /////////////////////////
+ // --- PET PROFILE --- //
+/////////////////////////
+
+.pet-profile-header {
+	@extend .row-box-space;
+
+	margin-bottom: 30px;
+	width: 700px;
+
+	.pet-side-box {
+		@extend .col-box;
+		width: 400px;
+		flex-wrap: wrap;
+
+		.info-box {
+			.info{
+				@extend .row-box;
+				align-items: flex-end;
+				margin: 20px;
+				margin-left: 0px;
+
+				img{
+					width: 20px;
+				    height: 20px;
+				    image-position: center;
+					object-fit: cover;
+					margin-right: 10px;
+				}
+			}
+		}
+
+		.interaction-box {
+			@extend .row-box;
+			justify-content: space-around;
+			margin-top: 10px;
+
+			.star-button {
+				@extend .col-box-center;
+				border: none;
+				box-shadow: none;
+				padding: 0px;
+
+				img {
+					height: 25px;
+					width: 25px;
+				}
+			}
+		}
+
+		.description {
+			margin: 20px;
+			padding: 10px;
+			box-shadow: 0px 0px 0px 1px #d8d8d8;
+		}
+	}
+}
+
+
+  ////////////////////////////
+ // --- ADOPT REQUESTS --- //
+////////////////////////////
+
+.req-box {
+	@extend .col-box-center;
+
+	border: 1px solid lightgrey;
+	box-shadow: 0px 0px 5px -2px grey;
+	width: 600px;
+	margin: 20px;
+
+	.req-title {
+		margin: 10px;
+	}
+
+	.close-button {
+		position: absolute;
+		transform: translateX(273px) translateY(5px);
+	}
+
+	.req-status {
+		margin: 10px;
+		font-size: 20px;
+	}
+
+	.req-interactions {
+		margin: 10px;
+	}
+}
+
+
+  ///////////////////////////
+ // --- ACCOUNT INITS --- //
+///////////////////////////
+
+.account-init-box {
+	@extend .col-box-center;
+
+	h1 {
+		font-size: 20px;
+		margin: 10px;
+		margin-bottom: 5px;
+	}
+
+	h3 {
+		font-size: 18px;
+		margin: 15px;
+	}
+
+	h4 {
+		text-align: center;
+		margin-bottom: 30px;
+		font-size: 15px;
+	}
+
+	form {
+		@extend .col-box-center;
+
+		input {
+			margin: 25px;
+			margin-top: 10px;
+		}
+	}
 }

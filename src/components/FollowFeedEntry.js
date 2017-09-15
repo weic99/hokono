@@ -15,7 +15,7 @@ const PetPost = props => (
     className="post-feed-entry-box"
   >
     <Link
-      to={`/pet/${props.post.petId}/post/${props.postId}`}
+      to={`/pet/${props.post.petId}/profile`}
     >
       <img
         src={props.post.image}
@@ -51,9 +51,9 @@ const PetPost = props => (
       </button>
       <FacebookShareButton
         className="share-button"
-        url={`localhost:3000/${props.petId}/post/${props.postId}`}
+        url={`https://hokono-90da1.firebaseapp.com/pet/${props.post.petId}/post/${props.postId}`}
         title={props.name}
-        description={props.post.description}
+        quote={props.post.description}
       >
         <FacebookIcon size={32} round/>
       </FacebookShareButton>
