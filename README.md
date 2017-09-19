@@ -1,4 +1,4 @@
-# hokono
+# Hokono
 
 > A place for pets
   > - Explore and follow pets from around the world
